@@ -71,7 +71,7 @@ export default {
 
         if (event === "goodbye") {
           this.furhat.send({
-            event_name: "hello",
+            event_name: "goodbye",
           })
         }
 
