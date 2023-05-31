@@ -1,6 +1,4 @@
 /build/
 /.gradle/
 /logs/
-/assets/exampleGui/node_modules/
-/assets/exampleGui/dist/
 .idea/
