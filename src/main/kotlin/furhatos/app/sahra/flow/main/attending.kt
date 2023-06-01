@@ -6,6 +6,7 @@ import furhatos.app.sahra.GOODBYE
 import furhatos.app.sahra.SPEECH_DONE
 import furhatos.app.sahra.SPEECH_STARTED
 import furhatos.app.sahra.SPEECH_STOP
+import furhatos.app.sahra.HISTORY_CLEAR
 import furhatos.app.sahra.flow.Parent
 import furhatos.event.actions.ActionGaze
 import furhatos.flow.kotlin.*
@@ -22,6 +23,10 @@ val Welcoming: State = state(Parent) {
 }
 
 val Attending: State = state(Parent) {
+
+    onEvent(HISTORY_CLEAR) {
+        Furhat.dialogHistory.clear()
+    }
 
     onEvent(SPEECH_STOP) {
         furhat.stopSpeaking()

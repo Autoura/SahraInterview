@@ -5,20 +5,24 @@
 
       <b-button-toolbar class="pt-2">
 
-        <b-button :disabled="!speaking" class="mx-1" @click="send_robot_event('SpeechStop')" variant="danger">
-          Stop speaking
-        </b-button>
-
-      </b-button-toolbar>
-
-      <b-button-toolbar class="pt-2">
-
         <b-button :disabled="speaking" class="mx-1" @click="send_robot_event('introduction')">
           Introduction
         </b-button>
 
         <b-button :disabled="speaking" class="mx-1" @click="send_robot_event('goodbye')">
           Final goodbye
+        </b-button>
+
+      </b-button-toolbar>
+
+      <b-button-toolbar class="pt-5">
+
+        <b-button :disabled="!speaking" class="mx-1" @click="send_robot_event('SpeechStop')" variant="danger">
+          Stop speaking
+        </b-button>
+
+        <b-button :disabled="speaking" class="mx-1" @click="send_robot_event('HistoryClear')" variant="danger">
+          Clear history
         </b-button>
 
       </b-button-toolbar>
