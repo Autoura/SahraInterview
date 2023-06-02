@@ -10,15 +10,23 @@
             id="listen_mode"
             v-model="listen_mode"
             :options="[
-              { text: 'Listen', value: 'listen', disabled: true },
-              { text: 'Listen & Reply', value: 'listenreply', disabled: false },
-              { text: 'Do not listen', value: 'nolisten', disabled: false }]"
+              { text: 'No interaction', value: 'nointeraction', disabled: false },
+             // { text: 'Listen', value: 'listen', disabled: true },
+              { text: 'Listen & Reply', value: 'listenreply', disabled: false }]"
             name="listen_mode"
             button-variant="outline-secondary"
             buttons
             @change="send_robot_listen_mode(listen_mode)"
         ></b-form-radio-group>
       </b-form-group>
+
+      <b-button-toolbar class="pt-2">
+
+        <b-button :disabled="speaking" class="mr-2" @click="send_robot_event('listen')">
+          Listen now
+        </b-button>
+
+      </b-button-toolbar>
 
       <b-button-toolbar class="pt-2">
 
@@ -66,7 +74,7 @@ export default {
       speaking: false,
       last_alive_UTC: Date.now(),
       now: Date.now(),
-      listen_mode: 'listenreply'
+      listen_mode: 'nointeraction'
     }
   },
   mounted() {

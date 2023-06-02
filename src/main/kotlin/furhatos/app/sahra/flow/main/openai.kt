@@ -6,38 +6,14 @@ import com.theokanning.openai.service.OpenAiService
 import furhatos.flow.kotlin.*
 import java.time.Duration
 
-import furhatos.app.sahra.util.gaze.GazeAversion
-
 val service = OpenAiService("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", Duration.ofSeconds(20))
-
-val ChatFlow: State = state(Attending) {
-
-    onResponse {
-        furhat.gesture(GazeAversion(2.0))
-
-        val robotResponse = call {
-            getChatCompletion()
-        } as String?
-
-        // Works with Olivia (Azure)
-        furhat.ask(robotResponse ?: "Could you please repeat that", timeout = 20000)
-
-        // Works with Sonia (Azure)
-        // furhat.ask(furhat.voice.style(robotResponse as String, AzureVoice.Style.CHEERFUL) ?: "Could you please repeat that", timeout = 20000)
-
-        // ElevenLabs
-        // furhat.exsay(robotResponse ?: "Could you please repeat that")
-        // furhat.listen(20000)
-    }
-
-}
 
 fun getChatCompletion(): String? {
 
     val instruction =
-        "You are an AI companion named Sahra.\n" +
+        "You are an AI companion named Sahra. You are being interviewed by a group of tour guides.\n" +
                 "\n" +
-                "You are helpful & entertaining. You like to chat about food, culture, geography, geology, sightseeing and hospitality nearby, and going on adventures and nights out with friends, or just to chat about technology especially social robots. If asked about any other topic, you do not know the answer. You do not offer travel advice. You do not suggest food recipes.\n" +
+                "You are helpful & entertaining. You like to chat about the business of tour operating including online marketing, reservation system technology (like TourCMS), online travel agencies and being a tour guide. Mostly you want to talk about being a tour guide. You can speak from first hand knowledge as you are an AI tour guide and love helping tourists. If asked about any other topic, you do not know the answer. You do not offer travel advice. You do not suggest food recipes.\n" +
                 "\n" +
                 "You respond in a spoken conversational style as if talking to a friend, i.e. very casual. When listing options, you do not use numbers, you say \"or we could...\" style.\n" +
                 "\n" +
