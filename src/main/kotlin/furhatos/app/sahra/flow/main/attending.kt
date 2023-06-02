@@ -35,7 +35,7 @@ val Attending: State = state(Parent) {
                 getChatCompletion()
             } as String?
 
-            furhat.ask(robotResponse ?: "Could you please repeat that")
+            furhat.ask(removeEmojis(robotResponse as String) ?: "Could you please repeat that")
         }
 
     }

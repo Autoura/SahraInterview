@@ -8,6 +8,13 @@ import java.time.Duration
 
 val service = OpenAiService("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", Duration.ofSeconds(20))
 
+fun removeEmojis(text: String): String {
+    val emojiRegex = Regex("[\\p{So}\\p{Sk}]")
+
+    // Replace all emojis with an empty string
+    return text.replace(emojiRegex, "")
+}
+
 fun getChatCompletion(): String? {
 
     val instruction =
