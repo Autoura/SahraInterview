@@ -18,6 +18,11 @@ val Attending: State = state(Parent) {
         furhat.gesture(Gestures.Smile)
     }
 
+    onUserLeave() {
+        furhat.attend(users.random)
+        furhat.gesture(Gestures.Smile)
+    }
+
     onEvent(HISTORY_CLEAR) {
         Furhat.dialogHistory.clear()
         furhat.gesture(Gestures.ExpressSad)
