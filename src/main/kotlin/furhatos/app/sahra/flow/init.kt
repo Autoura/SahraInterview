@@ -1,7 +1,7 @@
 package furhatos.app.sahra.flow
 
 import furhatos.app.sahra.*
-import furhatos.app.sahra.flow.main.Welcoming
+import furhatos.app.sahra.flow.main.Attending
 import furhatos.event.senses.SenseSkillGUIConnected
 import furhatos.flow.kotlin.*
 import furhatos.skills.HostedGUI
@@ -48,7 +48,7 @@ val GUIConnected = state(NoGUI) {
             }
         }, 0, interval.toLong())
 
-        goto(Welcoming)
+        goto(Attending)
     }
 
 }
