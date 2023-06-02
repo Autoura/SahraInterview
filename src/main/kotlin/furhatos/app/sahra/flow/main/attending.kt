@@ -6,9 +6,12 @@ import furhatos.app.sahra.SPEECH_DONE
 import furhatos.app.sahra.SPEECH_STARTED
 import furhatos.app.sahra.SPEECH_STOP
 import furhatos.app.sahra.HISTORY_CLEAR
+import furhatos.app.sahra.NEW_LISTEN_MODE
 import furhatos.app.sahra.flow.Parent
 import furhatos.flow.kotlin.*
 import furhatos.gestures.Gestures
+
+var listen_mode = "listenreply" // listenreply, listen, nolisten
 
 val Attending: State = state(Parent) {
 
@@ -44,6 +47,10 @@ val Attending: State = state(Parent) {
         send(SPEECH_STARTED)
         furhat.say("Thank you for chatting about AI with me today")
         send(SPEECH_DONE)
+    }
+
+    onEvent(NEW_LISTEN_MODE) {
+        listen_mode = it.get("data") as String
     }
 
 }
