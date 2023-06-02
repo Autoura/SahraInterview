@@ -3,6 +3,8 @@
 
     <b-container class="pt-5">
 
+      <b-alert variant="danger" v-if="disconnected" show>Disconnected from robot</b-alert>
+
       <b-button-toolbar class="pt-2">
 
         <b-button :disabled="speaking" class="mx-1" @click="send_robot_event('introduction')">
@@ -46,7 +48,9 @@ export default {
     return {
       furhat: null,
       mode: 'screensaver', // QR, screensaver, credentials
-      speaking: false
+      speaking: false,
+      last_alive_UTC: Date.now(),
+      now: Date.now()
     }
   },
   mounted() {
@@ -58,11 +62,33 @@ export default {
         })
         .catch(console.error)
 
-  },
+    this.interval = setInterval(() => {
+      this.now = Date.now();
+    }, 5000); // 5 seconds
 
+  },
+  computed: {
+    disconnected: function () {
+      // If we have lost connection between this GUI and the robot skill
+
+      let disconnected = false;
+
+      // If we haven't received an event for 10 seconds
+      // last_alive_UTC defaults to when loaded, so will not be disconnected for first 10 seconds after load
+      if (this.last_alive_UTC < (this.now - (10 * 1000))) {
+        disconnected = true;
+      }
+
+      return disconnected;
+    },
+  },
   methods: {
 
     setupSubscriptions() {
+
+      this.furhat.subscribe('furhatos.app.sahra.KeepAliveDelivery', () => {
+        this.last_alive_UTC = Date.now();
+      })
 
       this.furhat.subscribe('SpeechDone', () => {
         this.speaking = false;

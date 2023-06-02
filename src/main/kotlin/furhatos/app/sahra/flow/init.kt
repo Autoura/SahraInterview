@@ -8,12 +8,16 @@ import furhatos.skills.HostedGUI
 import furhatos.flow.kotlin.voice.AzureVoice
 import furhatos.flow.kotlin.voice.PollyVoice
 
-import furhatos.skills.SingleUserEngagementPolicy
 import furhatos.autobehavior.enableSmileBack
 import java.awt.Color
 
+import java.time.*
+import java.time.format.DateTimeFormatter
+import java.util.*
+
 // Our GUI declaration
 val GUI = HostedGUI("MonitorGUI", "assets/gui/dist", PORT)
+val timer = Timer()
 
 // Starting state, before our GUI has connected.
 val NoGUI: State = state(null) {
@@ -22,12 +26,6 @@ val NoGUI: State = state(null) {
     }
 }
 
-/*
-    Here we know our GUI has connected. Since the user might close down the GUI and then reopen
-    again, we inherit our handler from the NoGUI state. An edge case might be that a second GUI
-    is opened, but this is not accounted for here.
-
- */
 val GUIConnected = state(NoGUI) {
 
     init {
@@ -35,6 +33,20 @@ val GUIConnected = state(NoGUI) {
         furhat.setCharacter("Jane")
         furhat.ledStrip.solid(Color(0, 0, 0)) // Turn LED off
         furhat.enableSmileBack = true
+
+        // Keep sending events to the GUI app, so we can see there is a connection between the two
+        val interval = 3000 // 3 seconds
+
+        timer.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+
+                val currentDateTime = LocalDateTime.now(ZoneOffset.UTC)
+                val dateString = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+
+                println("KeepAlive timer called at $dateString")
+                send(KeepAliveDelivery(dateAlive = dateString))
+            }
+        }, 0, interval.toLong())
 
         goto(Welcoming)
     }

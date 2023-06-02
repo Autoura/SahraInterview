@@ -15,3 +15,7 @@ class EventDelivery(
         val event : String
 ) : Event()
 
+class KeepAliveDelivery(
+        val dateAlive : String
+) : Event()
+
