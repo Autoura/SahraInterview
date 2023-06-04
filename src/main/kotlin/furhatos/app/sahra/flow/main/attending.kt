@@ -1,13 +1,6 @@
 package furhatos.app.sahra.flow.main
 
-import furhatos.app.sahra.INTRODUCTION
-import furhatos.app.sahra.GOODBYE
-import furhatos.app.sahra.SPEECH_DONE
-import furhatos.app.sahra.SPEECH_STARTED
-import furhatos.app.sahra.SPEECH_STOP
-import furhatos.app.sahra.HISTORY_CLEAR
-import furhatos.app.sahra.NEW_LISTEN_MODE
-import furhatos.app.sahra.LISTEN
+import furhatos.app.sahra.*
 import furhatos.app.sahra.flow.Parent
 import furhatos.app.sahra.util.gaze.GazeAversion
 import furhatos.flow.kotlin.*
@@ -21,47 +14,61 @@ val Attending: State = state(Parent) {
     // ------------------- CHATTING -------------------
 
     onEvent(LISTEN) {
+        send(LISTENING_STARTED)
         furhat.listen()
     }
 
     onResponse {
+
+        send(LISTENING_ENDED)
 
         if (listen_mode == "listenreply") {
 
             furhat.gesture(GazeAversion(2.0))
             furhat.gesture(Gestures.Thoughtful)
 
+            send(THINKING_STARTED)
             val robotResponse = call {
                 getChatCompletion()
             } as String?
+            send(THINKING_ENDED)
 
-            furhat.ask(removeEmojis(robotResponse as String) ?: "Could you please repeat that")
+            send(SPEECH_STARTED)
+            furhat.say(removeEmojis(robotResponse as String) ?: "Could you please repeat that")
+            send(SPEECH_DONE)
+
+            send(LISTENING_STARTED)
+            furhat.listen()
         }
 
     }
 
     onNoResponse {
-
+        send(LISTENING_ENDED)
     }
 
     // ------------------- PRE DEFINED SPEECH -------------------
 
     onEvent(INTRODUCTION) {
+        send(LISTENING_ENDED)
         send(SPEECH_STARTED)
         furhat.say("Hello there, I have been looking forward to this conversation for a while")
         send(SPEECH_DONE)
 
         if (listen_mode == "listenreply") {
+            send(LISTENING_STARTED)
             furhat.listen()
         }
     }
 
     onEvent(GOODBYE) {
+        send(LISTENING_ENDED)
         send(SPEECH_STARTED)
         furhat.say("Thank you for chatting about AI with me today")
         send(SPEECH_DONE)
 
         if (listen_mode == "listenreply") {
+            send(LISTENING_STARTED)
             furhat.listen()
         }
     }
@@ -72,8 +79,17 @@ val Attending: State = state(Parent) {
         listen_mode = it.get("data") as String
 
         if (listen_mode == "listenreply") {
+            send(LISTENING_STARTED)
             furhat.listen()
         }
+
+        if (listen_mode == "nointeraction") {
+            send(LISTENING_ENDED)
+            send(THINKING_ENDED)
+            send(SPEECH_DONE) // The speech will continue until complete, however
+            furhat.stopListening()
+        }
+
     }
 
     onEvent(HISTORY_CLEAR) {
@@ -87,6 +103,7 @@ val Attending: State = state(Parent) {
         furhat.gesture(Gestures.ExpressDisgust)
 
         if (listen_mode == "listenreply") {
+            send(LISTENING_STARTED)
             furhat.listen()
         }
     }

@@ -5,6 +5,10 @@
 
       <b-alert variant="danger" v-if="disconnected" show>Disconnected from robot</b-alert>
 
+      <b-alert class="float-right" variant="warning" v-if="thinking" show>Thinking</b-alert>
+      <b-alert class="float-right" variant="secondary" v-if="listening" show>Listening</b-alert>
+      <b-alert class="float-right" variant="success" v-if="speaking" show>Speaking</b-alert>
+
       <b-form-group>
         <b-form-radio-group
             id="listen_mode"
@@ -22,7 +26,7 @@
 
       <b-button-toolbar class="pt-2">
 
-        <b-button :disabled="speaking" class="mr-2" @click="send_robot_event('listen')">
+        <b-button v-if="listen_mode !== 'nointeraction'" :disabled="thinking || speaking || listening" class="mr-2" @click="send_robot_event('listen')">
           Listen now
         </b-button>
 
@@ -74,7 +78,9 @@ export default {
       speaking: false,
       last_alive_UTC: Date.now(),
       now: Date.now(),
-      listen_mode: 'nointeraction'
+      listen_mode: 'nointeraction',
+      listening: false,
+      thinking: false
     }
   },
   mounted() {
@@ -120,6 +126,22 @@ export default {
 
       this.furhat.subscribe('SpeechStarted', () => {
         this.speaking = true;
+      })
+
+      this.furhat.subscribe('ListeningStarted', () => {
+        this.listening = true;
+      })
+
+      this.furhat.subscribe('ListeningEnded', () => {
+        this.listening = false;
+      })
+
+      this.furhat.subscribe('ThinkingStarted', () => {
+        this.thinking = true;
+      })
+
+      this.furhat.subscribe('ThinkingEnded', () => {
+        this.thinking = false;
       })
 
     },
