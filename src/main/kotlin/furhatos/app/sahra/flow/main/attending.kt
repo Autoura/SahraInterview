@@ -28,7 +28,7 @@ val Attending: State = state(Parent) {
                 getChatCompletion()
             } as String?
             send(THINKING_ENDED)
-            furhat.gesture(Gestures.Thoughtful(duration = 0.1)) // Cancel thoughtful
+            furhat.stopGestures();
 
             random(
                 furhat.gesture(Gestures.BigSmile(duration = 2.0)),
