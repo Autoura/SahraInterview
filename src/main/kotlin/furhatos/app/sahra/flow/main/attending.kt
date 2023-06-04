@@ -2,7 +2,6 @@ package furhatos.app.sahra.flow.main
 
 import furhatos.app.sahra.*
 import furhatos.app.sahra.flow.Parent
-import furhatos.app.sahra.util.gaze.GazeAversion
 import furhatos.flow.kotlin.*
 import furhatos.gestures.Gestures
 
@@ -23,14 +22,20 @@ val Attending: State = state(Parent) {
 
         if (listen_mode == "listenreply") {
 
-            furhat.gesture(GazeAversion(2.0))
-            furhat.gesture(Gestures.Thoughtful)
-
+            furhat.gesture(Gestures.Thoughtful(duration = 10.0)) // Will stop before 10
             send(THINKING_STARTED)
             val robotResponse = call {
                 getChatCompletion()
             } as String?
             send(THINKING_ENDED)
+            furhat.gesture(Gestures.Thoughtful(duration = 0.1)) // Cancel thoughtful
+
+            random(
+                furhat.gesture(Gestures.BigSmile(duration = 2.0)),
+                furhat.gesture(Gestures.Smile(duration = 2.0)),
+                furhat.gesture(Gestures.BigSmile(duration = 1.0)),
+                furhat.gesture(Gestures.Smile(duration = 1.0))
+            )
 
             send(SPEECH_STARTED)
             furhat.say(removeEmojis(robotResponse as String) ?: "Could you please repeat that")
