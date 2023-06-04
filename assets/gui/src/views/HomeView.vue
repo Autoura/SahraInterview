@@ -16,7 +16,7 @@
                             id="listen_mode"
                             v-model="listen_mode"
                             :options="[
-              { text: 'No interaction', value: 'nointeraction', disabled: false },
+              { text: 'Manual', value: 'nointeraction', disabled: false },
              // { text: 'Listen', value: 'listen', disabled: true },
               { text: 'Listen & Reply', value: 'listenreply', disabled: false }]"
                             name="listen_mode"
