@@ -51,7 +51,7 @@ val Attending: State = state(Parent) {
         send(LISTENING_ENDED)
     }
 
-    // ------------------- PRE DEFINED SPEECH -------------------
+    // ------------------- SPEECH DIRECTED BY UI -------------------
 
     onEvent("introduction") {
         send(LISTENING_ENDED)
@@ -121,16 +121,22 @@ val Attending: State = state(Parent) {
         furhat.gesture(Gestures.ExpressSad)
     }
 
-    onEvent("SpeechStop", instant = true) {
-        furhat.stopSpeaking()
-        send(SPEECH_DONE)
-        furhat.gesture(Gestures.ExpressDisgust)
+    onEvent("SpeechStop") {
+        // Has to block, otherwise might start listening, which will be unexpected
+        if (furhat.isSpeaking) {
+            furhat.stopSpeaking()
+            send(SPEECH_DONE)
+            furhat.gesture(Gestures.ExpressDisgust)
+        }
     }
 
-    onEvent("ListenStop", instant = true) {
-        furhat.stopListening()
-        send(LISTENING_ENDED)
-        furhat.gesture(Gestures.ExpressDisgust)
+    onEvent("ListenStop") {
+        // Has to block, otherwise doesn't actually stop listening
+        if (furhat.isListening) {
+            furhat.stopListening()
+            send(LISTENING_ENDED)
+            furhat.gesture(Gestures.ExpressDisgust)
+        }
     }
 
     // ------------------- HEAD -------------------
