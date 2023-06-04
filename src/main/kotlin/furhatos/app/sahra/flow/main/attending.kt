@@ -84,6 +84,11 @@ val Attending: State = state(Parent) {
         furhat.say(it.get("data") as String)
         send(SPEECH_DONE)
 
+        // Say & Listen
+        if (it.get("new_listen_mode") as String != "") {
+            listen_mode = it.get("new_listen_mode") as String
+        }
+
         if (listen_mode == "listenreply") {
             send(LISTENING_STARTED)
             furhat.listen()
@@ -119,6 +124,12 @@ val Attending: State = state(Parent) {
     onEvent("SpeechStop", instant = true) {
         furhat.stopSpeaking()
         send(SPEECH_DONE)
+        furhat.gesture(Gestures.ExpressDisgust)
+    }
+
+    onEvent("ListenStop", instant = true) {
+        furhat.stopListening()
+        send(LISTENING_ENDED)
         furhat.gesture(Gestures.ExpressDisgust)
     }
 

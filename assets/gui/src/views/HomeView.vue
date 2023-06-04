@@ -26,10 +26,14 @@
         ></b-form-radio-group>
       </b-form-group>
 
-      <b-button-toolbar class="pt-2" v-if="listen_mode !== 'nointeraction'">
+      <b-button-toolbar class="pt-2">
 
-        <b-button variant="success" :disabled="thinking || speaking || listening" class="mr-2" @click="send_robot_event('listen')">
+        <b-button variant="success" :disabled="thinking || speaking || listening || listen_mode ==='nointeraction'" class="mr-2" @click="send_robot_event('listen')">
           Listen now
+        </b-button>
+
+        <b-button :disabled="!listening" class="mr-2" @click="send_robot_event('ListenStop')" variant="danger">
+          Stop listening
         </b-button>
 
       </b-button-toolbar>
@@ -67,13 +71,17 @@
 
       <b-button-toolbar class="pt-2">
 
-        <b-button :disabled="!say" class="mr-2" @click="send_robot_say_this()" variant="success">
+        <b-button v-if="listen_mode === 'nointeraction'" :disabled="!say" class="mr-2" @click="send_robot_say_this()" variant="success">
           Say
         </b-button>
 
+        <b-button :disabled="!say" class="mr-2" @click="send_robot_say_this('listenreply')" variant="success">
+          Say & listen
+        </b-button>
+
         <b-button :disabled="!say" class="mr-2" @click="say = ''" variant="danger">
-Clear
-</b-button>
+          Clear
+        </b-button>
 
       </b-button-toolbar>
 
@@ -215,10 +223,16 @@ export default {
       })
     },
 
-    send_robot_say_this() {
+    send_robot_say_this(new_listen_mode = '') {
+
+      if (new_listen_mode) {
+        this.listen_mode = new_listen_mode;
+      }
+
       this.furhat.send({
         event_name: "SayThis",
-        data: this.say
+        data: this.say,
+        new_listen_mode: new_listen_mode
       })
     }
 
