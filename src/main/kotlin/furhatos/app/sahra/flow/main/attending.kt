@@ -5,7 +5,7 @@ import furhatos.app.sahra.flow.Parent
 import furhatos.flow.kotlin.*
 import furhatos.gestures.Gestures
 
-var listen_mode = "listenreply" // listenreply, listen, nointeraction
+var listen_mode = "nointeraction" // listenreply, listen, nointeraction
 
 val Attending: State = state(Parent) {
 
@@ -75,6 +75,19 @@ val Attending: State = state(Parent) {
 
         // Don't listen at this point otherwise the conversation will continue
         // IF we do bring back listening here, need to change the OpenAI prompt so Sahra knows the conversation is finished rather than trying to restart chatting
+    }
+
+    onEvent("SayThis") {
+        send(LISTENING_ENDED)
+
+        send(SPEECH_STARTED)
+        furhat.say(it.get("data") as String)
+        send(SPEECH_DONE)
+
+        if (listen_mode == "listenreply") {
+            send(LISTENING_STARTED)
+            furhat.listen()
+        }
     }
 
     // ------------------- FLOW MANAGEMENT -------------------

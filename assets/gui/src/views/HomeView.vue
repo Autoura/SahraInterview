@@ -28,7 +28,7 @@
 
       <b-button-toolbar class="pt-2" v-if="listen_mode !== 'nointeraction'">
 
-        <b-button :disabled="thinking || speaking || listening" class="mr-2" @click="send_robot_event('listen')">
+        <b-button variant="success" :disabled="thinking || speaking || listening" class="mr-2" @click="send_robot_event('listen')">
           Listen now
         </b-button>
 
@@ -46,17 +46,34 @@
           Final goodbye
         </b-button>
 
-      </b-button-toolbar>
-
-      <b-button-toolbar class="pt-2">
-
         <b-button :disabled="!speaking" class="mr-2" @click="send_robot_event('SpeechStop')" variant="danger">
           Stop speaking
         </b-button>
 
         <!--<b-button :disabled="speaking" class="mr-2" @click="send_robot_event('HistoryClear')" variant="danger">
-          Clear dialogue history
-        </b-button> -->
+  Clear dialogue history
+</b-button> -->
+
+      </b-button-toolbar>
+
+      <b-form-textarea
+          class="mt-2 w-50"
+          id="textarea"
+          v-model="say"
+          placeholder="Say this..."
+          rows="3"
+          max-rows="5"
+      ></b-form-textarea>
+
+      <b-button-toolbar class="pt-2">
+
+        <b-button :disabled="!say" class="mr-2" @click="send_robot_say_this()" variant="success">
+          Say
+        </b-button>
+
+        <b-button :disabled="!say" class="mr-2" @click="say = ''" variant="danger">
+Clear
+</b-button>
 
       </b-button-toolbar>
 
@@ -118,7 +135,8 @@ export default {
       now: Date.now(),
       listen_mode: 'nointeraction',
       listening: false,
-      thinking: false
+      thinking: false,
+      say: ''
     }
   },
   mounted() {
@@ -191,12 +209,17 @@ export default {
     },
 
     send_robot_listen_mode(new_listen_mode) {
-
       this.furhat.send({
         event_name: "NewListenMode",
         data: new_listen_mode
       })
+    },
 
+    send_robot_say_this() {
+      this.furhat.send({
+        event_name: "SayThis",
+        data: this.say
+      })
     }
 
   }
