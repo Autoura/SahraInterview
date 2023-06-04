@@ -39,7 +39,7 @@
 
       </b-button-toolbar>
 
-      <h4 class="pt-3">Speaking</h4>
+      <h4 class="pt-4">Speaking</h4>
 
       <b-button-toolbar class="pt-1">
 
@@ -87,7 +87,7 @@
 
       </b-button-toolbar>
 
-      <h4 class="pt-3">Face</h4>
+      <h4 class="pt-4">Face</h4>
 
       <b-button-toolbar class="pt-1">
 
