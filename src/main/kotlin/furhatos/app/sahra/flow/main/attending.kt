@@ -10,10 +10,9 @@ var listen_mode = "listenreply" // listenreply, listen, nointeraction
 
 val Attending: State = state(Parent) {
 
-
     // ------------------- CHATTING -------------------
 
-    onEvent(LISTEN) {
+    onEvent("listen") {
         send(LISTENING_STARTED)
         furhat.listen()
     }
@@ -49,8 +48,9 @@ val Attending: State = state(Parent) {
 
     // ------------------- PRE DEFINED SPEECH -------------------
 
-    onEvent(INTRODUCTION) {
+    onEvent("introduction") {
         send(LISTENING_ENDED)
+
         send(SPEECH_STARTED)
         furhat.say("Hello there, I have been looking forward to this conversation for a while")
         send(SPEECH_DONE)
@@ -61,21 +61,25 @@ val Attending: State = state(Parent) {
         }
     }
 
-    onEvent(GOODBYE) {
+    onEvent("goodbye") {
         send(LISTENING_ENDED)
+
         send(SPEECH_STARTED)
         furhat.say("Thank you for chatting about AI with me today")
         send(SPEECH_DONE)
 
-        if (listen_mode == "listenreply") {
-            send(LISTENING_STARTED)
-            furhat.listen()
-        }
+        // Don't listen at this point otherwise the conversation will continue
+        // IF we do bring back listening here, need to change the OpenAI prompt so Sahra knows the conversation is finished rather than trying to restart chatting
     }
 
     // ------------------- FLOW MANAGEMENT -------------------
 
-    onEvent(NEW_LISTEN_MODE) {
+    onEvent("NewListenMode") {
+        // Blocking - so everything will stop (except for speech, if saying something)
+        send(LISTENING_ENDED)
+        send(THINKING_ENDED)
+        send(SPEECH_DONE) // The speech will continue until complete, however. If the controller wants to stop speech, they can hit the stop speech button also
+
         listen_mode = it.get("data") as String
 
         if (listen_mode == "listenreply") {
@@ -84,39 +88,35 @@ val Attending: State = state(Parent) {
         }
 
         if (listen_mode == "nointeraction") {
-            send(LISTENING_ENDED)
-            send(THINKING_ENDED)
-            send(SPEECH_DONE) // The speech will continue until complete, however
             furhat.stopListening()
         }
 
     }
 
-    onEvent(HISTORY_CLEAR) {
+    onEvent("HistoryClear", instant = true) {
         Furhat.dialogHistory.clear()
         furhat.gesture(Gestures.ExpressSad)
     }
 
-    onEvent(SPEECH_STOP) {
+    onEvent("SpeechStop", instant = true) {
         furhat.stopSpeaking()
         send(SPEECH_DONE)
         furhat.gesture(Gestures.ExpressDisgust)
-
-        if (listen_mode == "listenreply") {
-            send(LISTENING_STARTED)
-            furhat.listen()
-        }
     }
 
     // ------------------- ATTENTION -------------------
 
+    onEvent("unattend", instant = true) {
+        furhat.attendNobody()
+    }
+
     // TODO - this needs more work for stage use, it is OK for web streaming when only 1 person in the room, but will get distracted by people if there are more around. Perhaps for stage use we need to attend a location
-    onUserEnter() {
+    onUserEnter(instant = true) {
         furhat.attend(it)
         furhat.gesture(Gestures.BigSmile)
     }
 
-    onUserLeave() {
+    onUserLeave(instant = true) {
         furhat.attend(users.random)
         furhat.gesture(Gestures.Smile)
     }

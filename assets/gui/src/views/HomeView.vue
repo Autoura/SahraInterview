@@ -9,7 +9,9 @@
       <b-alert class="float-right" variant="secondary" v-if="listening" show>Listening</b-alert>
       <b-alert class="float-right" variant="success" v-if="speaking" show>Speaking</b-alert>
 
-      <b-form-group>
+      <h4>Listening</h4>
+
+      <b-form-group class="mb-0">
         <b-form-radio-group
             id="listen_mode"
             v-model="listen_mode"
@@ -24,15 +26,17 @@
         ></b-form-radio-group>
       </b-form-group>
 
-      <b-button-toolbar class="pt-2">
+      <b-button-toolbar class="pt-2" v-if="listen_mode !== 'nointeraction'">
 
-        <b-button v-if="listen_mode !== 'nointeraction'" :disabled="thinking || speaking || listening" class="mr-2" @click="send_robot_event('listen')">
+        <b-button :disabled="thinking || speaking || listening" class="mr-2" @click="send_robot_event('listen')">
           Listen now
         </b-button>
 
       </b-button-toolbar>
 
-      <b-button-toolbar class="pt-2">
+      <h4 class="pt-3">Speaking</h4>
+
+      <b-button-toolbar class="pt-1">
 
         <b-button :disabled="speaking" class="mr-2" @click="send_robot_event('introduction')">
           Introduction
@@ -44,14 +48,24 @@
 
       </b-button-toolbar>
 
-      <b-button-toolbar class="pt-5">
+      <b-button-toolbar class="pt-2">
 
         <b-button :disabled="!speaking" class="mr-2" @click="send_robot_event('SpeechStop')" variant="danger">
           Stop speaking
         </b-button>
 
         <b-button :disabled="speaking" class="mr-2" @click="send_robot_event('HistoryClear')" variant="danger">
-          Clear history
+          Clear dialogue history
+        </b-button>
+
+      </b-button-toolbar>
+
+      <h4 class="pt-3">Face</h4>
+
+      <b-button-toolbar class="pt-1">
+
+        <b-button class="mr-2" @click="send_robot_event('unattend')">
+          Unattend
         </b-button>
 
       </b-button-toolbar>
