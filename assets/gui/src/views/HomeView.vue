@@ -12,23 +12,24 @@
       <h4>Listening</h4>
 
       <b-form-group class="mb-0">
-        <b-form-radio-group
-            id="listen_mode"
-            v-model="listen_mode"
-            :options="[
+        <b-form-radio-group style="width:50vw"
+                            id="listen_mode"
+                            v-model="listen_mode"
+                            :options="[
               { text: 'No interaction', value: 'nointeraction', disabled: false },
              // { text: 'Listen', value: 'listen', disabled: true },
               { text: 'Listen & Reply', value: 'listenreply', disabled: false }]"
-            name="listen_mode"
-            button-variant="outline-secondary"
-            buttons
-            @change="send_robot_listen_mode(listen_mode)"
+                            name="listen_mode"
+                            button-variant="outline-secondary"
+                            buttons
+                            @change="send_robot_listen_mode(listen_mode)"
         ></b-form-radio-group>
       </b-form-group>
 
       <b-button-toolbar class="pt-2">
 
-        <b-button variant="success" :disabled="thinking || speaking || listening || listen_mode ==='nointeraction'" class="mr-2" @click="send_robot_event('listen')">
+        <b-button variant="success" :disabled="thinking || speaking || listening || listen_mode ==='nointeraction'" class="mr-2"
+                  @click="send_robot_event('listen')">
           Listen now
         </b-button>
 
@@ -61,7 +62,8 @@
       </b-button-toolbar>
 
       <b-form-textarea
-          class="mt-2 w-50"
+          class="mt-2"
+          style="width:50vw"
           id="textarea"
           v-model="say"
           placeholder="Say this..."
