@@ -109,6 +109,24 @@ val Attending: State = state(Parent) {
         furhat.gesture(Gestures.ExpressDisgust)
     }
 
+    // ------------------- HEAD -------------------
+
+    onEvent("smile", instant = true) {
+        furhat.gesture(Gestures.BigSmile(duration = 2.0))
+    }
+
+    onEvent("disgust", instant = true) {
+        furhat.gesture(Gestures.ExpressDisgust)
+    }
+
+    onEvent("nod", instant = true) {
+        furhat.gesture(Gestures.Nod)
+    }
+
+    onEvent("shake", instant = true) {
+        furhat.gesture(Gestures.Shake)
+    }
+
     // ------------------- ATTENTION -------------------
 
     onEvent("unattend", instant = true) {

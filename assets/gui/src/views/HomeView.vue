@@ -54,9 +54,9 @@
           Stop speaking
         </b-button>
 
-        <b-button :disabled="speaking" class="mr-2" @click="send_robot_event('HistoryClear')" variant="danger">
+        <!--<b-button :disabled="speaking" class="mr-2" @click="send_robot_event('HistoryClear')" variant="danger">
           Clear dialogue history
-        </b-button>
+        </b-button> -->
 
       </b-button-toolbar>
 
@@ -66,6 +66,30 @@
 
         <b-button class="mr-2" @click="send_robot_event('unattend')">
           Unattend
+        </b-button>
+
+      </b-button-toolbar>
+
+      <b-button-toolbar class="pt-2">
+
+        <b-button variant="success" class="mr-2" @click="send_robot_event('smile')">
+          Smile
+        </b-button>
+
+        <b-button variant="success" class="mr-2" @click="send_robot_event('nod')">
+          Nod
+        </b-button>
+
+      </b-button-toolbar>
+
+      <b-button-toolbar class="pt-2">
+
+        <b-button variant="warning" class="mr-2" @click="send_robot_event('disgust')">
+          Disgust
+        </b-button>
+
+        <b-button variant="warning" class="mr-2" @click="send_robot_event('shake')">
+          Shake
         </b-button>
 
       </b-button-toolbar>
