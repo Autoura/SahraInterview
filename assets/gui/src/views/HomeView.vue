@@ -186,7 +186,7 @@ export default {
         this.last_alive_UTC = Date.now();
       })
 
-      this.furhat.subscribe('SpeechDone', () => {
+      this.furhat.subscribe('SpeechEnded', () => {
         this.speaking = false;
       })
 

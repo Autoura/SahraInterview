@@ -4,7 +4,7 @@ import furhatos.event.Event
 
 val PORT = 8100 // GUI Port
 
-val SPEECH_DONE = "SpeechDone"
+val SPEECH_ENDED = "SpeechEnded"
 val SPEECH_STARTED = "SpeechStarted"
 val LISTENING_STARTED = "ListeningStarted"
 val LISTENING_ENDED = "ListeningEnded"

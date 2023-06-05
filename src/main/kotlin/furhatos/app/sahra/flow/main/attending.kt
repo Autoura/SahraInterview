@@ -39,7 +39,7 @@ val Attending: State = state(Parent) {
 
             send(SPEECH_STARTED)
             furhat.say(removeEmojis(robotResponse as String) ?: "Could you please repeat that")
-            send(SPEECH_DONE)
+            send(SPEECH_ENDED)
 
             send(LISTENING_STARTED)
             furhat.listen()
@@ -58,7 +58,7 @@ val Attending: State = state(Parent) {
 
         send(SPEECH_STARTED)
         furhat.say("Hello there, I have been looking forward to this conversation for a while")
-        send(SPEECH_DONE)
+        send(SPEECH_ENDED)
 
         if (listen_mode == "listenreply") {
             send(LISTENING_STARTED)
@@ -71,7 +71,7 @@ val Attending: State = state(Parent) {
 
         send(SPEECH_STARTED)
         furhat.say("Thank you for chatting about AI with me today")
-        send(SPEECH_DONE)
+        send(SPEECH_ENDED)
 
         // Don't listen at this point otherwise the conversation will continue
         // IF we do bring back listening here, need to change the OpenAI prompt so Sahra knows the conversation is finished rather than trying to restart chatting
@@ -82,7 +82,7 @@ val Attending: State = state(Parent) {
 
         send(SPEECH_STARTED)
         furhat.say(it.get("data") as String)
-        send(SPEECH_DONE)
+        send(SPEECH_ENDED)
 
         // Say & Listen
         if (it.get("new_listen_mode") as String != "") {
@@ -101,7 +101,7 @@ val Attending: State = state(Parent) {
         // Blocking - so everything will stop (except for speech, if saying something)
         send(LISTENING_ENDED)
         send(THINKING_ENDED)
-        send(SPEECH_DONE) // The speech will continue until complete, however. If the controller wants to stop speech, they can hit the stop speech button also
+        send(SPEECH_ENDED) // The speech will continue until complete, however. If the controller wants to stop speech, they can hit the stop speech button also
 
         listen_mode = it.get("data") as String
 
@@ -125,7 +125,7 @@ val Attending: State = state(Parent) {
         // Has to block, otherwise might start listening, which will be unexpected
         if (furhat.isSpeaking) {
             furhat.stopSpeaking()
-            send(SPEECH_DONE)
+            send(SPEECH_ENDED)
             furhat.gesture(Gestures.ExpressDisgust)
         }
     }
