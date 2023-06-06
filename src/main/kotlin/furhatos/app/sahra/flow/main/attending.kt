@@ -150,11 +150,11 @@ val Attending: State = state(Parent) {
     }
 
     onEvent("nod", instant = true) {
-        furhat.gesture(Gestures.Nod)
+        furhat.gesture(Gestures.Nod(duration = 2.0))
     }
 
     onEvent("shake", instant = true) {
-        furhat.gesture(Gestures.Shake)
+        furhat.gesture(Gestures.Shake(duration = 2.0))
     }
 
     // ------------------- ATTENTION -------------------
