@@ -35,10 +35,13 @@ Two predefined text can be set for convenience.
 
 ## Topics to talk about
 
-* Ask about stories from when Sahra is a tour guide
-* Ask about whether Sahra perfers day tours or multiday tours
+* Ask her about stories from when Sahra is a tour guide
+* Ask her about whether Sahra prefers day tours or multiday tours
+* Ask her about what skills are useful for a tour guide to know
 
 What you can't ask about is locations or generate an itinerary. We have stopped Sahra talking about this (in this skill) via the OpenAI prompt.
+
+Remember to ask followup questions, if Sahra says something, ask her about what she just said. This makes a more natural conversation.
 
 ## What to tell others
 
@@ -57,3 +60,7 @@ These simple rules will help:
   * Say something (say anything related to conversation)
   * Say summary (summarise conversation to this point)
 * Stage use - could define how to interact with the wider audience
+
+## Ask us to build your Furhat skill
+
+We at [Autoura](https://www.autoura.com) are a startup operating tourism, leisure & hospitality experiences using AI characters (i.e. our own Sahra AI companion but also brand characters). We can build [Furhat](https://furhatrobotics.com/) robot skills for you. We are not cheap, but we get it done.
