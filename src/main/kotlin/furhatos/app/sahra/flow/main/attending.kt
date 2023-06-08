@@ -175,15 +175,10 @@ val Attending: State = state(Parent) {
         furhat.attendNobody()
     }
 
-    // TODO - this needs more work for stage use, it is OK for web streaming when only 1 person in the room, but will get distracted by people if there are more around. Perhaps for stage use we need to attend a location
+    // TODO - this needs more work. We don't attend, as for streaming use, we need to keep looking at the camera
     onUserEnter(instant = true) {
-        furhat.attend(it)
+        furhat.glance(it, async = true)
         furhat.gesture(Gestures.BigSmile)
-    }
-
-    onUserLeave(instant = true) {
-        furhat.attend(users.random)
-        furhat.gesture(Gestures.Smile)
     }
 
 }
