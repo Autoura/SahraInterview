@@ -3,10 +3,11 @@ package furhatos.app.sahra.util
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
 import com.theokanning.openai.completion.chat.ChatMessage
 import com.theokanning.openai.service.OpenAiService
+import furhatos.app.sahra.settings.OPENAPI_KEY
 import furhatos.flow.kotlin.*
 import java.time.Duration
 
-val service = OpenAiService("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", Duration.ofSeconds(20))
+val service = OpenAiService(OPENAPI_KEY, Duration.ofSeconds(20))
 
 fun removeEmojis(text: String): String {
     // Replace all emojis with an empty string
