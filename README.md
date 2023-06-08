@@ -29,6 +29,13 @@ The skill can be used in manual mode, or say & listen mode.
 
 Or you can jump between modes during a conversation.
 
+## Topics to talk about
+
+* Ask about stories from when Sahra is a tour guide
+* Ask about whether Sahra perfers day tours or multiday tours
+
+What you can't ask about is locations or generate an itinerary. We have stopped Sahra talking about this (in this skill) via the OpenAI prompt.
+
 ## What to tell others
 
 If you want to involve others chatting to Sahra they may not be familiar with how Furhat robots work. 
