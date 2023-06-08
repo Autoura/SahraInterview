@@ -128,6 +128,9 @@ val Attending: State = state(Parent) {
             furhat.stopSpeaking()
             send(SPEECH_ENDED)
             furhat.gesture(Gestures.ExpressDisgust)
+        } else {
+            // As not speaking, no need to stop speaking. Ensure the UI is in sync with skill
+            send(SPEECH_ENDED)
         }
     }
 
@@ -137,6 +140,9 @@ val Attending: State = state(Parent) {
             furhat.stopListening()
             send(LISTENING_ENDED)
             furhat.gesture(Gestures.ExpressDisgust)
+        } else {
+            // As not listening, no need to stop listening. Ensure the UI is in sync with skill
+            send(LISTENING_ENDED)
         }
     }
 
@@ -151,11 +157,11 @@ val Attending: State = state(Parent) {
     }
 
     onEvent("nod", instant = true) {
-        furhat.gesture(Gestures.Nod(duration = 2.0))
+        furhat.gesture(Gestures.Nod)
     }
 
     onEvent("shake", instant = true) {
-        furhat.gesture(Gestures.Shake(duration = 2.0))
+        furhat.gesture(Gestures.Shake)
     }
 
     // ------------------- ATTENTION -------------------
