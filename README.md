@@ -1,10 +1,13 @@
 # Sahra Interview
 
-Interview Sahra using a Furhat robot with answers either powered by OpenAI chat API or as a puppet under manual control
+Interview Sahra using a Furhat robot with answers either powered by OpenAI chat API or as a puppet under manual control.
+
+You can find out more about Sahra here: https://www.autoura.com/recipes/sahra
 
 ## One time setup
 * Setup an OpenAI account & API key
 * Within the assets/gui directory, you need to build the UI app:
+
 ```
 npm install
 npm run build
@@ -12,25 +15,29 @@ npm run build
 
 This skill can be used either:
 * Furhat virtual robot
-* Compiled, and used on Furhat hardware robot
+* Compiled (e.g. IntelliJ), and uploaded/used on a Furhat hardware robot
 
 ## Scope
 
-This skill is designed for web streaming. In particular the robot will not attend a user like _regular_ Furhat skills.
+This skill is designed for web streaming. In particular the robot will not attend a user like _regular_ Furhat skills, instead will look ahead (i.e. at a video camera)
 
-It could be used for stage presentations but you need to think about where the robot looks.
+This skill could be used for stage presentations but you need to think about where the robot looks, perhaps including panned glancing towards the audience.
 
 ## Modes
 
 The skill can be used in manual mode, or say & listen mode.
 
+Or you can jump between modes during a conversation.
+
 ## What to tell others
 
-If you want to involve others chatting to Sahra they may not be familiar with how Furhat robots work. These simple rules will help
+If you want to involve others chatting to Sahra they may not be familiar with how Furhat robots work. 
 
+These simple rules will help:
+
+* OpenAI's responses can take 4-5 seconds to reply. Talk when the LED is green (listening), don't talk when red (thinking)
 * Maximum speak time is 20 seconds (Microsoft Speech to Text limit). But really should keep questions and interactions short
-* An umm or err is not an interaction
-* OpenAI's responses can take 4-5 seconds to reply. Talk when green, don't talk when red
+* An umm or err is not an interaction, nor is whistling. It has to be words that the speech to text can pickup
 
 ## Roadmap
 
