@@ -38,7 +38,8 @@ val Attending: State = state(Parent) {
             )
 
             send(SPEECH_STARTED)
-            furhat.say(removeEmojis(robotResponse as String) ?: "Could you please repeat that")
+            // If we ONLY get an emoji response, when you remove the emoji you can end up with nothing. This at least means that we say something
+            furhat.say(removeEmojis(robotResponse as String).takeIf { it.isNotEmpty() } ?: "Oh")
             send(SPEECH_ENDED)
 
             send(LISTENING_STARTED)
