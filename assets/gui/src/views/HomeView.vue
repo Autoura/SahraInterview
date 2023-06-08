@@ -89,13 +89,13 @@
 
       <h4 class="pt-4">Face</h4>
 
-      <b-button-toolbar class="pt-1">
+<!--      <b-button-toolbar class="pt-1">-->
 
-        <b-button class="mr-2" @click="send_robot_event('unattend')">
-          Unattend
-        </b-button>
+<!--        <b-button class="mr-2" @click="send_robot_event('unattend')">-->
+<!--          Unattend-->
+<!--        </b-button>-->
 
-      </b-button-toolbar>
+<!--      </b-button-toolbar>-->
 
       <b-button-toolbar class="pt-2">
 
