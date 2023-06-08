@@ -47,7 +47,6 @@ val GUIConnected = state(NoGUI) {
                 val currentDateTime = LocalDateTime.now(ZoneOffset.UTC)
                 val dateString = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 
-                println("KeepAlive timer called at $dateString")
                 send(KeepAliveDelivery(dateAlive = dateString))
             }
         }, 0, interval.toLong())
