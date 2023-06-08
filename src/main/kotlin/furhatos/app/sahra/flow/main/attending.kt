@@ -38,8 +38,13 @@ val Attending: State = state(Parent) {
             )
 
             send(SPEECH_STARTED)
-            // If we ONLY get an emoji response, when you remove the emoji you can end up with nothing. This at least means that we say something
-            furhat.say(removeEmojis(robotResponse as String).takeIf { it.isNotEmpty() } ?: "Oh")
+            if (robotResponse?.isNotEmpty() == true) {
+                // If we ONLY get an emoji response, when you remove the emoji you can end up with nothing, so we have to say something. Ideally we don't have only emoji responses. Emojis are removed generally because the text to speech AI mostly doesn't really do a good job at saying an emoji
+                furhat.say(removeEmojis(robotResponse).takeIf { it.isNotEmpty() } ?: "Oh")
+            } else {
+                // Likely an OpenAI issue
+                furhat.say("Sorry I didn't understand, please say that again")
+            }
             send(SPEECH_ENDED)
 
             send(LISTENING_STARTED)
