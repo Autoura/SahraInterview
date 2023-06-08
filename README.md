@@ -1,10 +1,16 @@
 # Sahra Interview
 
-Interview Sahra using a Furhat robot with answers either powered by OpenAI Chat GPT API (ChatGPT 4) or as a puppet under manual control.
+Interview Sahra using a Furhat robot with answers either powered by OpenAI ChatGPT API (ChatGPT 4) or as a puppet under manual control.
 
 You can find out more about Sahra here: https://www.autoura.com/recipes/sahra
 
 ![control_ui](screenshot_control.png)
+
+## Scope
+
+This skill is designed for web streaming. In particular the robot will not attend a user like _regular_ Furhat skills, instead will look ahead (i.e. at a video camera)
+
+This skill could be used for stage presentations but you need to think about where the robot looks, perhaps including panned glancing towards the audience.
 
 ## One time setup
 * Setup an OpenAI account & API key
@@ -18,12 +24,6 @@ npm run build
 This skill can be used either:
 * Furhat virtual robot
 * Compiled (e.g. IntelliJ), and uploaded/used on a Furhat hardware robot
-
-## Scope
-
-This skill is designed for web streaming. In particular the robot will not attend a user like _regular_ Furhat skills, instead will look ahead (i.e. at a video camera)
-
-This skill could be used for stage presentations but you need to think about where the robot looks, perhaps including panned glancing towards the audience.
 
 ## Modes & general use
 
