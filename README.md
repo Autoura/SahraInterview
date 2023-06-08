@@ -4,6 +4,8 @@ Interview Sahra using a Furhat robot with answers either powered by OpenAI Chat 
 
 You can find out more about Sahra here: https://www.autoura.com/recipes/sahra
 
+![control_ui](screenshot_control.png)
+
 ## One time setup
 * Setup an OpenAI account & API key
 * Within the assets/gui directory, you need to build the UI app:
@@ -60,6 +62,7 @@ These simple rules will help:
   * Say something (say anything related to conversation)
   * Say summary (summarise conversation to this point)
 * Stage use - could define how to interact with the wider audience
+* Update UI to Vue3 as Vue2 is EOL December 2023
 
 ## Ask us to build your Furhat skill
 
