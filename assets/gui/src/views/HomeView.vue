@@ -78,7 +78,7 @@
         </b-button>
 
         <b-button :disabled="!say" class="mr-2" @click="send_robot_say_this('listenreply')" variant="success">
-          Say & listen
+          Say & Listen
         </b-button>
 
         <b-button :disabled="!say" class="mr-2" @click="say = ''" variant="danger">
