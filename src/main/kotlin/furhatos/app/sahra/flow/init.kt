@@ -5,7 +5,7 @@ import furhatos.event.senses.SenseSkillGUIConnected
 import furhatos.flow.kotlin.*
 import furhatos.skills.HostedGUI
 import furhatos.flow.kotlin.voice.AzureVoice
-import furhatos.flow.kotlin.voice.PollyVoice
+import furhatos.flow.kotlin.voice.PollyNeuralVoice
 
 import furhatos.autobehavior.enableSmileBack
 import java.awt.Color
@@ -28,7 +28,7 @@ val NoGUI: State = state(null) {
 val GUIConnected = state(NoGUI) {
 
     init {
-        furhat.voice = if (AzureVoice("SoniaNeural").isAvailable) AzureVoice("SoniaNeural") else PollyVoice.Matthew()
+        furhat.voice = if (AzureVoice("SoniaNeural").isAvailable) AzureVoice("SoniaNeural") else PollyNeuralVoice.Amy()
         furhat.setCharacter("Jane")
         furhat.ledStrip.solid(Color(0, 0, 0)) // Turn LED off
         furhat.enableSmileBack = true
