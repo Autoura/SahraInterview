@@ -1,6 +1,8 @@
 package furhatos.app.sahra.flow
 
 import furhatos.app.sahra.*
+import furhatos.app.sahra.settings.distanceToEngage
+import furhatos.app.sahra.settings.maxNumberOfUsers
 import furhatos.event.senses.SenseSkillGUIConnected
 import furhatos.flow.kotlin.*
 import furhatos.skills.HostedGUI
@@ -29,6 +31,7 @@ val GUIConnected = state(NoGUI) {
 
     init {
         furhat.voice = if (AzureVoice("SoniaNeural").isAvailable) AzureVoice("SoniaNeural") else PollyNeuralVoice.Amy()
+        users.setSimpleEngagementPolicy(distanceToEngage, maxNumberOfUsers)
         furhat.setCharacter("Jane")
         furhat.ledStrip.solid(Color(0, 0, 0)) // Turn LED off
         furhat.enableSmileBack = true
