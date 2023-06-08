@@ -1,11 +1,13 @@
-package furhatos.app.sahra.util.api
+package furhatos.app.sahra.util
 
 import com.google.gson.JsonParser
 import khttp.get
 
+// Autoura API documentation : https://www.autoura.com/docs/api
+
 fun AutouraApiGet(apiUrl: String): Any {
 
-    val token = "7757a1969aaba8c3f8e717ffa462fe"
+    val token = "7757a1969aaba8c3f8e717ffa462fe" // Autoura test key (public so OK to be in Github)
     val headers = mapOf("Authorization" to "Bearer $token")
 
     val response = get("https://api.autoura.com/api/$apiUrl", headers = headers)

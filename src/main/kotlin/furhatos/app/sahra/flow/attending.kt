@@ -1,7 +1,8 @@
-package furhatos.app.sahra.flow.main
+package furhatos.app.sahra.flow
 
 import furhatos.app.sahra.*
-import furhatos.app.sahra.flow.Parent
+import furhatos.app.sahra.util.getChatCompletion
+import furhatos.app.sahra.util.removeEmojis
 import furhatos.flow.kotlin.*
 import furhatos.gestures.Gestures
 
