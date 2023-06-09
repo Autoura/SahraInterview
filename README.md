@@ -13,8 +13,20 @@ This skill is designed for web streaming. In particular the robot will not atten
 This skill could be used for stage presentations but you need to think about where the robot looks, perhaps including panned glancing towards the audience.
 
 ## One time setup
-* Setup an OpenAI account & API key
-* Within the assets/gui directory, you need to build the UI app:
+
+Two configurations required. You need to setup an OpenAI API key and you need to build the UI app.
+
+#### 1) OpenAI
+Setup an OpenAI account & API key
+* Within src/main/kotlin/furhatos/app/sahra/settings/ rename openai_CONFIGURE.kt to openai.kt
+* Set your OpenAI API key in that file   
+
+```
+val OPENAPI_KEY = "YOUR_OPENAI_API_KEY_HERE"
+```
+
+#### 2) UI app
+Within the assets/gui directory, you need to build the UI app:
 
 ```
 npm install
@@ -35,15 +47,17 @@ Sahra will automatically reply if in listen & reply mode. Otherwise you as the h
 
 Two predefined text can be set for convenience.
 
+We like using head movement gestures as these are clearer when web streaming. You can manually tap a gesture and this will not interupt any other action that is happening concurrently.
+
 ## Topics to talk about
 
 * Ask her about stories from when Sahra is a tour guide
 * Ask her about whether Sahra prefers day tours or multiday tours
 * Ask her about what skills are useful for a tour guide to know
 
-What you can't ask about is locations or generate an itinerary. We have stopped Sahra talking about this (in this skill) via the OpenAI prompt.
+Remember to ask followup questions, if Sahra says something interesting, ask her about what she just said. This makes a more natural conversation.
 
-Remember to ask followup questions, if Sahra says something, ask her about what she just said. This makes a more natural conversation.
+What you can't ask about is locations or generate a tour itinerary. We have stopped Sahra talking about this (in this skill) via the OpenAI prompt.
 
 ## What to tell others
 
@@ -66,4 +80,6 @@ These simple rules will help:
 
 ## Ask us to build your Furhat skill
 
-We at [Autoura](https://www.autoura.com) are a startup operating tourism, leisure & hospitality experiences using AI characters (i.e. our own Sahra AI companion but also brand characters). We can build [Furhat](https://furhatrobotics.com/) robot skills for you. We are not cheap, but we get it done.
+We at [Autoura](https://www.autoura.com) are a digital experience platform (DXP) operating tourism, leisure & hospitality experiences using AI characters (i.e. our own Sahra AI companion but also brand characters).
+
+We can build [Furhat](https://furhatrobotics.com/) robot skills for you. We are not cheap, but we get it done.

@@ -2,3 +2,4 @@
 /.gradle/
 /logs/
 .idea/
+src/main/kotlin/furhatos/app/sahra/settings/openai.kt
