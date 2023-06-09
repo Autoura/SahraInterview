@@ -17,7 +17,7 @@ This skill could be used for stage presentations but you need to think about whe
 Two configurations required. You need to setup an OpenAI API key and you need to build the UI app.
 
 #### 1) OpenAI
-Setup an OpenAI account & API key
+Setup an OpenAI account (https://platform.openai.com/) & API key
 * Within src/main/kotlin/furhatos/app/sahra/settings/ rename openai_CONFIGURE.kt to openai.kt
 * Set your OpenAI API key in that file   
 
