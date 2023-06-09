@@ -83,3 +83,7 @@ These simple rules will help:
 We at [Autoura](https://www.autoura.com) are a digital experience platform (DXP) operating tourism, leisure & hospitality experiences using AI characters (i.e. our own Sahra AI companion but also brand characters).
 
 We can build [Furhat](https://furhatrobotics.com/) robot skills for you. We are not cheap, but we get it done.
+
+## Legal notice
+
+Although the code is MIT licensed, Sahra® is a registered trademark: European Union: 018181403, i.e. whatever you do with this code, you can't call what you create "Sahra"
